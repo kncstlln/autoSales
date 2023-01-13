@@ -187,7 +187,7 @@ h2 {
 
 .main {
   background: #f8f8f8;
-  padding: 150px;
+  margin-bottom: 100px;
   overflow: hidden; }
 
 .clear {
@@ -251,7 +251,9 @@ body {
   -ms-transform: translate(-50%, -50%); }
 
 .signup {
-  margin-bottom: 150px; 
+  margin-top: 0px;
+  margin-bottom: 0px; 
+  overflow: hidden;
  }
 
 .signup-content {
