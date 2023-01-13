@@ -305,6 +305,16 @@ figure {
   display: block;
   text-align: center; }
 
+.error{
+  margin-left:30px;
+  color:red;
+}
+
+.registerSuccess{
+  color:green;
+  text-align: center;
+}
+
 #logo-head {
   background-color: transparent;
   text-decoration: none;

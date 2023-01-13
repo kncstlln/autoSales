@@ -4,20 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Auto Sales</title>
 
+    <!-- These are the bootstrap links -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- Main css -->
+    
+    <!-- Angular JS link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- Main style csss -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+    <!-- Main javascript js -->
+    <script src="js/script.js"></script>
+
 </head>
-<body>
 
-    <div class="main">
+<body ng-app="">
 
-        <!-- Sign up form -->
+    <!--This is the sign in page-->
+    <div class="main" ng-hide="showSignup">
+        <section class="sign-in">
+            <div id="logo-head" style="text-align:center;">
+                <img src="images/logo.png" alt="logo" style="width:200px;">
+                <h1 style="text-align:center;">Innovatio Auto Sales Center</h1>
+             </div>
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image" style="width:150%;">
+                        <figure><img src="images/mercedes.png" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link" ng-click="showSignup = true">Create an account</a>
+                        <div class="registerSuccess" id="registerSuccess"></div>
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">Sign In</h2>
+                        <form method="POST" class="register-form" id="login-form" name="myLoginForm">
+                            <div class="form-group">
+                                <label for="l_username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="l_username" id="username" placeholder="User Name" oninput="return(validateLoginUsername());"/>
+                                <div class="error" id="l_usernameError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="l_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="l_pass" id="l_pass" placeholder="Password" oninput="return(validateLoginPassword());"/>
+                                <div class="error" id="l_passError"></div>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" onclick="return(validateLogin());"/>
+                            </div>
+                        </form>
+                        <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- This is the sign up page -->
+    <div class="main" ng-show="showSignup">
         <section class="signup">
             <div id="logo-head" style="text-align:center;">
                 <img src="images/logo.png" alt="logo" style="width:200px;">
@@ -27,33 +82,41 @@
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" action="signin.html"class="register-form" id="register-form">
+                        <form method="POST" class="register-form" id="register-form" name="myForm" oninput="return(validateAll());">
                             <div class="form-group">
-                                <label for="first_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="firstname" placeholder="First Name"/>
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="username" placeholder="User Name" oninput="return(validateUsername());"/>
+                                <div class="error" id="usernameError"></div>
                             </div>
                             <div class="form-group">
-                                <label for="last_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="lastname" placeholder="Last Name"/>
+                                <label for="firstname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="firstname" id="firstname" placeholder="First Name" oninput="return(validateFirstName());"/>
+                                <div class="error" id="firstnameError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="lastname" id="lastname" placeholder="Last Name"/>
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                <input type="email" name="email" id="email" placeholder="Your Email" oninput="return(validateEmail());"/>
+                                <div class="error" id="emailError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
+                                <input type="password" name="pass" id="pass" placeholder="Password" oninput="return(validatePassword());"/>
+                                <div class="error" id="passError"></div>
                             </div>
                             <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <label for="re_pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" oninput="return(validateRepass());"/>
+                                <div class="error" id="re_passError"></div>
                             </div>
                             <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                                <label class="label-agree-term"><span><span></span></span>Already have an account? <a href="#" class="term-service" ng-click="showSignup = false">Sign In</a></label>
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register" ng-click="showSignup = false" disabled/>
                             </div>
                         </form>
                     </div>
@@ -64,11 +127,7 @@
                 </div>
             </div>
         </section>
-
-
     </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>
